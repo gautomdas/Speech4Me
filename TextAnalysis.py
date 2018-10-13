@@ -35,7 +35,7 @@ class TextAnalysis:
     # Updates, collects, and returns data.
 
     ##### INDEX 0 IN DATA: Text Sentiment #####
-    # [INDEX 0] Compounded score (0.0 - 1.0)            [INDEX 1] Negative connotation rating (0.0 - 1.0),
+    # [INDEX 0] Compounded score (-1.0 - 1.0)            [INDEX 1] Negative connotation rating (0.0 - 1.0),
     # [INDEX 2] Positive connotation rating (0.0 - 1.0) [INDEX 3] Neutral connotation rating (0.0 - 1.0)
     ##### INDEX 1 IN DATA: Sentence Info #####
     # [INDEX 0] Sentence count          [INDEX 1] Unique wordcount
