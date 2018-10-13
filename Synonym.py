@@ -41,7 +41,7 @@ class Synonym:
     #           in [INDEX 1]. Higher frequencies mean harder words.
 
     def getChange(self, word, harder=None):
-        freqSyn = self.getFreqSyn(word)
+        freqSyn = self.getFreqSyn(word).sort(key=lambda x : x[1])
         finalAns = []
         if harder is None:
             return freqSyn
@@ -50,10 +50,12 @@ class Synonym:
                 if item[1] > self.inputFreq:
                     finalAns.append(item)
         else:
+            print("test2")
             for item in freqSyn:
                 if item[1] < self.inputFreq:
                     finalAns.append(item)
-        return finalAns.sort(key=lambda x : x[1])
+        finalAns.sort(key=lambda x : x[1])
+        return finalAns
 
     ##### READ FILE METHOD #####
     # Reads a file and returns a dictionary with words and frequency number.
