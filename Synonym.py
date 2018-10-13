@@ -35,14 +35,16 @@ class Synonym:
 
     ##### MAIN METHOD #####
     # [ARG 1] Word to check for
-    # [ARG 2] True: Check for harder words, False: Check for easier words.
+    # [ARG 2] True: Check for harder words, False: Check for easier words, None: Return all
     # [RETURN] 2D Array. Each index in main array will "belong" to a synonym.
     #           Each index contains the string in [INDEX 0] and the frequency score
     #           in [INDEX 1]. Higher frequencies mean harder words.
 
-    def getChange(self, word, harder=True):
+    def getChange(self, word, harder=None):
         freqSyn = self.getFreqSyn(word)
         finalAns = []
+        if harder is None:
+            return freqSyn
         if harder:
             for item in freqSyn:
                 if item[1] > self.inputFreq:
