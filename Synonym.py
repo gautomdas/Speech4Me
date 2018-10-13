@@ -41,7 +41,8 @@ class Synonym:
     #           in [INDEX 1]. Higher frequencies mean harder words.
 
     def getChange(self, word, harder=None):
-        freqSyn = self.getFreqSyn(word).sort(key=lambda x : x[1])
+        freqSyn = self.getFreqSyn(word)
+        freqSyn.sort(key=lambda x : x[1])
         finalAns = []
         if harder is None:
             return freqSyn
