@@ -1,5 +1,4 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from re import split as respl
 from textstat.textstat import textstat
 from math import ceil
 
@@ -12,80 +11,167 @@ class TextAnalysis:
     @classmethod
     def blank(cls):
         return cls("")
-    
+
+    # Initialize TextAnalysis with text input.
     def __init__(self, text):
         self.text = text
-        self.splList = respl("\W+", text)
+        self.splList = self.text.split()
         self.data = []
-        
+
+    # Set text in class to input.
     def setText(self, text):
         self.text = text
-        self.splList = respl("\W+", text)
+        self.splList = self.text.split()
         self.data = []
 
-    def autoGet(self, text):
+    # Update and set text to input, then return results.
+    def auto(self, text):
         self.text = text
-        self.splList = respl("\W+", text)
+        self.splList = self.text.split()
         self.data = []
         return self.updateData()
-        
+
+    ########## METHOD: Update Data ##########
+    # Updates, collects, and returns data.
+
+    ##### INDEX 0 IN DATA: Text Sentiment #####
+    # [INDEX 0] Compounded score (0.0 - 1.0)            [INDEX 1] Negative connotation rating (0.0 - 1.0),
+    # [INDEX 2] Positive connotation rating (0.0 - 1.0) [INDEX 3] Neutral connotation rating (0.0 - 1.0)
+    ##### INDEX 1 IN DATA: Sentence Info #####
+    # [INDEX 0] Sentence count          [INDEX 1] Unique wordcount
+    # [INDEX 2] Syllable count          [INDEX 3] Overall word count
+    # [INDEX 4] Character count
+    ##### INDEX 2 IN DATA: Flesch Reading Ease #####
+    # [INDEX 0] Pure score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 100
+    ##### INDEX 3 IN DATA: Flesch-Kincaid Grade #####
+    # [INDEX 0] Pure score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 18
+    ##### INDEX 4 IN DATA: Gunning FOG Index #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 18
+    ##### INDEX 5 IN DATA: SMOG Index #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 18
+    ##### INDEX 6 IN DATA: Automated Readability Index #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 14
+    ##### INDEX 7 IN DATA: Coleman-Liau Index #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 18
+    ##### INDEX 8 IN DATA: Linsear Write Index #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 18
+    ##### INDEX 9 IN DATA: Dale-Chall Readability Score #####
+    # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+    # SCORE SCALE: 0 - 10
+    ##### INDEX 10 IN DATA: Overall Score #####
+    # Approximate grade (NOT A LIST)
+
+
     def updateData(self):
+
         # Full list of polarity scores
-        self.data.append(self.sid.polarity_scores(self.text)) #0
-        # Compounded score (0.0 - 1.0)
-        self.data.append(self.data[0]['compound']) #1
-        # Negative connotation rating (0.0 - 1.0)
-        self.data.append(self.data[0]['neg']) #2
-        # Positive connotation rating (0.0 - 1.0)
-        self.data.append(self.data[0]['pos']) #3
-        # Neutral connotation rating (0.0 - 1.0)
-        self.data.append(self.data[0]['neu']) #4
-        # # of detected sentences
-        self.data.append(textstat.sentence_count(self.text)) #5
-        # # of unique words in sentence (ignores apostrophes and such)
-        self.data.append(textstat.lexicon_count(self.text)) #6
-        # # of syllables in text
-        self.data.append(textstat.syllable_count(self.text)) #7
-        # Flesch reading ease score (0 - 100, 0 being hard and 100 being easy)
-        self.data.append(textstat.flesch_reading_ease(self.text)) #8
+        self.polscore = self.sid.polarity_scores(self.text)
 
-        self.data.append(self.freGrade(self.data[8])) #9
-        # Grade of text using flesch kincaid grade
-        self.data.append(textstat.flesch_kincaid_grade(self.text)) #10
-        # Grade of text using FOG system
-        self.data.append(textstat.gunning_fog(self.text)) #11
-        # Grade of text using SMOG (basically, more complicated FOG)
-        self.data.append(textstat.smog_index(self.text)) #12
-        # Grade of text using automated readability index
-        self.data.append(ceil(textstat.automated_readability_index(self.text))) #13
+        ##### INDEX 0 IN DATA: Text Sentiment #####
+        # [INDEX 0] Compounded score (0.0 - 1.0)            [INDEX 1] Negative connotation rating (0.0 - 1.0),
+        # [INDEX 2] Positive connotation rating (0.0 - 1.0) [INDEX 3] Neutral connotation rating (0.0 - 1.0)
+        self.data.append([self.polscore['compound'], self.polscore['neg'], self.polscore['pos'], self.polscore['neu']])
 
-        self.data.append(self.ariGrade(self.data[13])) #14
-        # Grade of text using Coleman-Liau index
-        self.data.append(textstat.coleman_liau_index(self.text)) #15
-        # Grade of text using Linsear write formula
-        self.data.append(textstat.linsear_write_formula(self.text)) #16
-        
-        self.data.append(textstat.dale_chall_readability_score(self.text)) #17
+        ##### INDEX 1 IN DATA: Sentence Info #####
+        # [INDEX 0] Sentence count          [INDEX 1] Unique wordcount
+        # [INDEX 2] Syllable count          [INDEX 3] Overall word count
+        # [INDEX 4] Character count
+        self.data.append([textstat.sentence_count(self.text), textstat.lexicon_count(self.text),
+                          textstat.syllable_count(self.text), len(self.splList), len(self.text)])
 
-        self.data.append(self.daleChallGrade(self.data[17])) #18
-        
-        self.data.append(textstat.text_standard(self.text)) #19
-        self.data.append(len(self.splList))
-##        self.polarity = self.sid.polarity_scores(self.text)
-##        self.sentences = textstat.sentence_count(self.text)
-##        self.unique_words = textstat.lexicon_count(self.text)
-##        self.syllables = textstat.syllable_count(self.text)
-##        self.fleschReadEase = textstat.flesch_reading_ease(self.text)
-##        self.fKGrade = textstat.flesch_kincaid_grade(self.text)
-##        self.fog = textstat.gunning_fog(self.text)
-##        self.smog = textstat.smog_index(self.text)
-##        self.autoReadIndex = textstat.automated_readability_index(self.text)
-##        self.cLIndex = textstat.coleman_liau_index(self.text)
-##        self.linsearWrite = textstat.linsear_write_formula(self.text)
-##        self.daleChallRead = textstat.dale_chall_readability_score(self.text)
-##        self.readConsensus = textstat.text_standard(self.text)
+        ##### INDEX 2 IN DATA: Flesch Reading Ease #####
+        # [INDEX 0] Pure score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 100
+        self.freStat = min(max(textstat.flesch_reading_ease(self.text), 0), 100)
+        self.data.append([self.freStat, self.freGrade(self.freStat)])
+
+        ##### INDEX 3 IN DATA: Flesch-Kincaid Grade #####
+        # [INDEX 0] Pure score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 18
+        self.fkgStat = self.adjustScore(textstat.flesch_kincaid_grade(self.text))
+        self.data.append([self.fkgStat, self.grade(self.fkgStat)])
+
+        ##### INDEX 4 IN DATA: Gunning FOG Index #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 18
+        self.fogStat = self.adjustScore(textstat.gunning_fog(self.text))
+        self.data.append([self.fogStat, self.grade(self.fogStat)])
+
+        ##### INDEX 5 IN DATA: SMOG Index #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 18
+        self.smogStat = self.adjustScore(textstat.smog_index(self.text))
+        self.data.append([self.smogStat, self.grade(self.smogStat)])
+
+        ##### INDEX 6 IN DATA: Automated Readability Index #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 14
+        self.ariStat = min(max(textstat.automated_readability_index(self.text), 0), 14)
+        self.data.append([self.ariStat, self.ariGrade(ceil(self.ariStat))]) #13
+
+        ##### INDEX 7 IN DATA: Coleman-Liau Index #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 18
+        self.cliStat = self.adjustScore(textstat.coleman_liau_index(self.text))
+        self.data.append([self.cliStat, self.grade(self.cliStat)])
+
+        ##### INDEX 8 IN DATA: Linsear Write Index #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 18
+        self.lwiStat = self.adjustScore(textstat.linsear_write_formula(self.text))
+        self.data.append([self.lwiStat, self.grade(self.lwiStat)])
+
+        ##### INDEX 9 IN DATA: Dale-Chall Readability Score #####
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 10
+        self.dcrStat = min(max(textstat.dale_chall_readability_score(self.text), 0), 10)
+        self.data.append([self.dcrStat, self.grade(self.dcrStat)])
+
+        ##### INDEX 10 IN DATA: Overall Score #####
+        # Approximate grade
+        self.data.append(textstat.text_standard(self.text))
+
         return self.data
 
+    # Adjust score to be between 0 and 18.
+    def adjustScore(self, score):
+        return min(max(score, 0), 18)
+
+    # Approximate grade from score based on US grade system
+    def grade(self, score):
+        if (score > 17):
+            return "College graduate"
+        elif (score < 1):
+            return "Kindergarten"
+        gradeApprox = round(score)
+        return {
+            1:"Kindergarten",
+            2:"1st and 2nd grade",
+            3:"3rd grade",
+            4:"4th grade",
+            5:"5th grade",
+            6:"6th grade",
+            7:"7th grade",
+            8:"8th grade",
+            9:"9th grade",
+            10:"10th grade",
+            11:"11th grade",
+            12:"12th grade",
+            13:"College freshman",
+            14:"College sophomore",
+            15:"College junior",
+            16:"College senior",
+            17:"College graduate"
+        }[gradeApprox]
+
+    # Specific grade for Dale-Chall Readability Score
     def daleChallGrade(self, adjScore):
         if adjScore < 5:
             return "4th grade and below"
@@ -102,10 +188,12 @@ class TextAnalysis:
         else:
             return "College graduate"
 
-
+    # Specific grade for Automated Readability Index
     def ariGrade(self, score):
         if (score > 14):
             return "College graduate"
+        elif (score < 1):
+            return "Kindergarten"
         return {
             1:"Kindergarten",
             2:"1st and 2nd grade",
@@ -123,6 +211,7 @@ class TextAnalysis:
             14:"College graduate"
         }[score]
 
+    # Specific grade for Flesch Reading Ease
     def freGrade(self, score):
         if score < 30:
             return "College graduate"
@@ -138,26 +227,5 @@ class TextAnalysis:
             return "6th grade"
         else:
             return "5th grade and below"
-
-##    def setDisplay(self, enabled):
-##        self.enabled = enabled
-##
-##    def getPolarity(self):
-##        return self.polarity
-##    
-##    def getCompound(self):
-##        return self.polarity['compound']
-##
-##    def getPos(self):
-##        return self.polarity['pos']
-##
-##    def getNeut(self):
-##        return self.polarity['neu']
-##
-##    def getNeg(self):
-##        return self.polarity['neg']
-##
-##    def getSentences(self):
-##        return self.sentences
 
     
