@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <style>
+  body {
+  	width: 100vw;
+  	height: 90vh;
+  	color: #fff;
+  	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  	background-size: 400% 400%;
+  	-webkit-animation: Gradient 15s ease infinite;
+  	-moz-animation: Gradient 15s ease infinite;
+  	animation: Gradient 15s ease infinite;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  @-webkit-keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+
+  @-moz-keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+
+  @keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+  textarea {
+    background-color:rgba(0, 0, 0, 0.5);
+    color: white;
+    resize: none;
+    border: 0 none;
+    outline: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+
+    font-family: 'Quicksand', sans-serif;
+    padding: 30px;
+    height: 60vh;
+    width: 80vw;
+    border-radius: 15px;
+    line-height: 200%;
+
+  }
+  .container {
+    width: 80%;
+    height: 120px;
+    margin: auto;
+  }
+  .one {
+      width: 15%;
+      float: left;
+  }
+  #text{
+    font-size: 100px;
+  }
+  #myLogo{
+    height: 120px;
+  }
+  form {
+    margin: 0 auto;
+    }
+  #button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 50px;
+  }
+
+  .basic{
+      width: 80%;
+      margin: auto;
+  }
+  .Abasic{
+      width: 100%;
+      margin: auto;
+  }
+    h1{
+        font-size: 50px;
+    }
+    h5{
+        font-size: 100px;
+    }
+    .scoreSet{
+        width:40%;
+        margin:auto;
+    }
+    td, th{
+        font-size: 35px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+  <section class="container">
+      <div class="one"><img id="myLogo" src="../static/logo.svg"></img></div>
+      <div class="two" id="text">&nbsp; Speech for Me</div>
+  </section>
+
+
+<section class="basic">
+    <h1 align="center">Text Sentiment</h1>
+    <table style="width:100%">
+      <tr>
+        <td align="right" style="width:50%">Compounded Score:</td>
+        <td align="left" style="width:50%">{{ comp }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Negative Connotation:</td>
+        <td align="left" style="width:50%">{{ neg }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Positive Connotation:</td>
+        <td align="left" style="width:50%">{{ pos }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Neutral Connotation:</td>
+        <td align="left" style="width:50%">{{ neut }}</td>
+      </tr>
+    </table>
+</section>
+
+<section class="basic">
+    <h1 align="center">General Text Info</h1>
+    <table style="width:100%">
+      <tr>
+        <td align="right" style="width:50%">Setence Count:</td>
+        <td align="left" style="width:50%">{{ sent }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Unique Word Count:</td>
+        <td align="left" style="width:50%">{{ uniq }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Syllable Count:</td>
+        <td align="left" style="width:50%">{{ syll }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Word Count:</td>
+        <td align="left" style="width:50%">{{ word }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Character Count:</td>
+        <td align="left" style="width:50%">{{ char }}</td>
+      </tr>
+    </table>
+</section>
+
+<section class="basic">
+    <h1 align="center">Flesch Reading Ease</h1>
+    <table style="width:100%">
+      <tr>
+        <td align="right" style="width:50%">Setence Count:</td>
+        <td align="left" style="width:50%">{{ sent }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Unique Word Count:</td>
+        <td align="left" style="width:50%">{{ uniq }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Syllable Count:</td>
+        <td align="left" style="width:50%">{{ syll }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Word Count:</td>
+        <td align="left" style="width:50%">{{ word }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Character Count:</td>
+        <td align="left" style="width:50%">{{ char }}</td>
+      </tr>
+    </table>
+</section>
+
+<section class="Abasic" style="margin:auto">
+    <h1 align="center">Approximate Grades</h1>
+    <table style="width:100%; margin: auto">
+      <tr>
+        <th align="right" style="width:33%"></th>
+        <th align="center" style="width:33%">Score</th>
+        <th align="center" style="width:33%">Grade</th>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Flesch Reading Ease:</td>
+        <td align="center" style="width:33%">{{ fre_s }}</td>
+        <td align="center" style="width:33%">{{ fre_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Flesch-Kincaid Grade:</td>
+        <td align="center" style="width:33%">{{ fkg_s }}</td>
+        <td align="center" style="width:33%">{{ fkg_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Gunning Fog Index:</td>
+        <td align="center" style="width:33%">{{ gfi_s }}</td>
+        <td align="center" style="width:33%">{{ gfi_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">SMOG Index:</td>
+        <td align="center" style="width:33%">{{ si_s }}</td>
+        <td align="center" style="width:33%">{{ si_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Automated Readability Index:</td>
+        <td align="center" style="width:33%">{{ ari_s }}</td>
+        <td align="center" style="width:33%">{{ ari_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Coleman-Liau Index:</td>
+        <td align="center" style="width:33%">{{ cli_s }}</td>
+        <td align="center" style="width:33%">{{ cli_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Linsear Write Index:</td>
+        <td align="center" style="width:33%">{{ lwi_s }}</td>
+        <td align="center" style="width:33%">{{ lwi_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Dale-Chall Readability:</td>
+        <td align="center" style="width:33%">{{ dcr_s }}</td>
+        <td align="center" style="width:33%">{{ dcr_g }}</td>
+      </tr>
+
+    </table>
+</section>
+
+<div style="text-align:center;">
+    <form action="{{ url_for('submit') }}" method="post">
+        <input id="button" type="submit">
+    </form>
+  </div>
+
+<p>{{ var1 }}</p>
+</body>
+</html>
