@@ -51,7 +51,6 @@ class Synonym:
                 if item[1] > self.inputFreq:
                     finalAns.append(item)
         else:
-            print("test2")
             for item in freqSyn:
                 if item[1] < self.inputFreq:
                     finalAns.append(item)
