@@ -53,7 +53,7 @@ class Synonym:
             for item in freqSyn:
                 if item[1] < self.inputFreq:
                     finalAns.append(item)
-        return finalAns
+        return finalAns.sort(key=lambda x : x[1])
 
     ##### READ FILE METHOD #####
     # Reads a file and returns a dictionary with words and frequency number.
