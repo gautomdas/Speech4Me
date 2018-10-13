@@ -1,11 +1,11 @@
 from flask import Flask, request, url_for, redirect, render_template
-import TextAnalysis
+from TextAnalysis import TextAnalysis
 
 app = Flask(__name__)
 
 regular_calc = ""
 
-textA = TextAnalysis.TextAnalysis.blank()
+textA = TextAnalysis.blank()
 data = []
 
 @app.route('/', methods=['GET', 'POST'])
