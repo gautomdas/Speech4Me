@@ -142,7 +142,7 @@ class TextAnalysis:
         # SCORE SCALE: 0 - 20
         self.txtStd = min(max(textstat.text_standard(self.text, True), 0), 20)
         self.txtInfo = textstat.text_standard(self.text)
-        self.data.append([self.txtStd, self.txtGrade(self.txtStd)])
+        self.data.append([self.txtStd, self.txtGrade(self.txtStd, self.txtInfo)])
 
         return self.data
 
