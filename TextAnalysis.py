@@ -85,7 +85,7 @@ class TextAnalysis:
         # [INDEX 4] Character count         [INDEX 5] Character count without spaces
         # [INDEX 6] Avg letters per word    [INDEX 7] Avg syllables per word
         self.data.append([textstat.sentence_count(self.text), textstat.avg_sentence_length(self.text),
-                          textstat.syllable_count(self.text), len(self.splList), len(self.text, False),
+                          textstat.syllable_count(self.text), len(self.splList), textstat.char_count(self.text, False),
                           textstat.char_count(self.count, True), textstat.avg_letter_per_word(self.text),
                           textstat.avg_syllables_per_word(self.text)])
 
