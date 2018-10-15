@@ -4,7 +4,7 @@ from Synonym import Synonym
 from subprocess import call
 
 call(["python", "-m", "nltk.downloader", "wordnet","vader_lexicon"])
-
+print("Its working rn hopefully!")
 app = Flask(__name__)
 
 regular_calc = ""
