@@ -11,6 +11,8 @@ textSyn = Synonym()
 data = []
 
 original_grad = 0
+original_grad = 10
+all_text = ""
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
@@ -21,12 +23,33 @@ def third():
 
     grade = request.form['someid']
     print("id: "+grade)
+    all_lines = all_text.splitlines()
+    final = []
+    if(int(grade)>original_grad):
+        string_start = "<p><select class=\"someSel\" id=\"someSel\">"
+        for line in all_lines:
+            words = line.split(" ")
+            for word in words:
+                choices = textSyn.getChange(word)
+                print(choices)
+
+    else:
+        print("jiknkies")
     return render_template('third.html')
+
+@app.route('/fourth', methods=['GET', 'POST'])
+def fourth():
+
+    grade = request.form['someid']
+    print("id: "+grade)
+    return render_template('fourth.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
     text = request.form['text']
     print(text)
+    global all_text
+    all_text=text
     data = textA.auto(text)
     print(data)
     avg_char = round((data[1][4]/data[1][3]), 2)

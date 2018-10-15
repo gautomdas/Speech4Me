@@ -1,13 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <style>
+  <style>
   body {
   	width: 100vw;
-  	height: 160vh;
+  	height: 90vh;
   	color: #fff;
   	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   	background-size: 400% 400%;
@@ -101,42 +99,6 @@
     font-size: 50px;
   }
 
-  .basic{
-      width: 80%;
-      margin: auto;
-  }
-  .Abasic{
-      width: 100%;
-      margin: auto;
-  }
-    h1{
-        font-size: 50px;
-    }
-    h5{
-        font-size: 100px;
-    }
-    .scoreSet{
-        width:40%;
-        margin:auto;
-    }
-    td, th{
-        font-size: 35px;
-    }
-    p{
-        font-size: 35px;
-    }
-
-  canvas{
-      margin: auto;
-      width:700px !important;
-      height:400px !important;
-      background-color: rgba(255, 255, 255, 0);
-
-    }
-  h2{
-      font-size:50px !important;
-  }
-
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
@@ -145,36 +107,11 @@
       <div class="one"><img id="myLogo" src="../static/logo.svg"></img></div>
       <div class="two" id="text">&nbsp; Speech for Me</div>
   </section>
-<style>
-.someSel {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    overflow: hidden;
-    padding: 5px 8px;
-    border: none;
-    box-shadow: none;
-    background: RGBA(0, 0, 0, 0.5);
-    background-image: none;
-    -webkit-appearance: none;
-    outline: none;
-    font-size: 35px;
-    color: white;
-    font-family: 'Quicksand', sans-serif;
-}
-.others{
-    font-size: 35px;
-    font-family: 'Quicksand', sans-serif;
-    color: white;
-}
-</style>
-<br/>
-
-<div style="text-align:center;">
+  <div style="text-align:center;">
     <form action="{{ url_for('submit') }}" method="post">
-        {% include 'inserte.html' %}
+        <textarea name="text">LOL OKAY</textarea>
         <input id="button" type="submit">
     </form>
   </div>
 </body>
 </html>
-
