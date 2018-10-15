@@ -3,7 +3,6 @@ from TextAnalysis import TextAnalysis
 from Synonym import Synonym
 from subprocess import call
 
-call(["python", "-m", "nltk.downloader", "wordnet","vader_lexicon"])
 
 app = Flask(__name__)
 
@@ -186,4 +185,4 @@ def stats():
 # textSyn.getChange(word, False) - Returns 2d list of synonyms considered "easier"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
