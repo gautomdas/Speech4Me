@@ -7,7 +7,7 @@
     <style>
   body {
   	width: 100vw;
-  	height: 160vh;
+  	height: 100%;
   	color: #fff;
   	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   	background-size: 400% 400%;
@@ -124,6 +124,7 @@
     }
     p{
         font-size: 35px;
+        line-height: 1.9;
     }
 
   canvas{
@@ -136,7 +137,19 @@
   h2{
       font-size:50px !important;
   }
-
+  #edit_text{
+      width: 80%;
+      margin: auto;
+  }
+    select {
+      text-align: center;
+      text-align-last: center;
+      /* webkit*/
+    }
+    option {
+      text-align: center;
+      /* reset to left*/
+    }
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
@@ -168,13 +181,17 @@
 }
 </style>
 <br/>
-
-<div style="text-align:center;">
-    <form action="{{ url_for('submit') }}" method="post">
-        {% include 'inserte.html' %}
-        <input id="button" type="submit">
-    </form>
-  </div>
+<div style="width: 80%; text-align: center; margin: auto;">
+  <h2>You wanted a {{ type_a }} text. These are words we considered to be {{ type_a }}. Click the grey boxes to start making changes: </h2>
+</div>
+<form action="{{ url_for('submit') }}" method="post">
+    <div id="edit_text" style="text-align:left;">
+    {% include 'inserte.html' %}
+    </div>
+    <div style="text-align: center">
+    <input id="button" type="submit">
+    </div>
+</form>
 </body>
 </html>
 

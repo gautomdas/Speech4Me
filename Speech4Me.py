@@ -29,16 +29,56 @@ def third():
     all_lines = all_text.splitlines()
     final = []
     if(int(grade)>original_grad):
-        string_start = "<p><select class=\"someSel\" id=\"someSel\">"
-        for line in all_lines:
-            words = line.split(" ")
-            for word in words:
-                choices = textSyn.getChange(word)
-                print(choices)
+        type_e = "harder"
+        string_start = "<p>"
 
+        for line in all_lines:
+            print("FLAG")
+            words = line.split(" ")
+            print(words)
+            for word in words:
+                print("_"*20)
+                print(word)
+                per_flag = False
+                sec_flag = False
+                if "." in word:
+                    per_flag = True
+                    word = word.split(".")[0]
+                choices = textSyn.getChange(word, True)
+                if(len(word)>3):
+                    print("HERE")
+                    if(len(choices)==0):
+                        if per_flag:
+                            string_start+= word+". "
+                            sec_flag = True
+                        else:
+                            string_start+= word+" "
+                    if(len(choices)>0):
+                        string_start+=" <select class=\"someSel\" id=\"someSel\">"
+                        string_start+= "<option class=\"others\" value=\""+word+"\">"+word+"</option>"
+                        for choice in choices:
+                            string_start+= "<option class=\"others\" value=\""+choice[0]+"\">"+choice[0]+"</option>"
+                        string_start+= "</select></span> "
+                else:
+                    if per_flag:
+                        string_start += word + ". "
+                        sec_flag = True
+                    else:
+                        string_start += word + " "
+                if per_flag and not sec_flag:
+                    string_start+=". "
+
+            string_start+="<br>"
+        string_start += "</p>"
+        print(string_start)
     else:
         print("jiknkies")
-    return render_template('third.html')
+
+    Html_file = open("templates/inserte.html", "w")
+    Html_file.write(string_start)
+    Html_file.close()
+    return render_template('third.html', type_a = type_e)
+
 
 @app.route('/fourth', methods=['GET', 'POST'])
 def fourth():
@@ -56,7 +96,7 @@ def submit():
     data = textA.auto(text)
     print(data)
     text_sentiment = [data[0][0], data[0][1], data[0][2], data[0][3]]
-    gen_text_info = data[1][0:7]
+    gen_text_info = data[1][0:4]
 
     all_labels = ['fre_s', 'fre_g', 'fkg_s', 'fkg_g', 'gfi_s', 'gfi_g', 'si_s', 'si_g', ' ari_s', 'ari_g', 'cli_s', 'cli_g', 'lwi_s', 'lwi_g', 'dcr_s', 'dcr_g']
     all_datas = [data[2][0], data[3][0], data[4][0], data[5][0], data[6][0], data[7][0], data[8][0], data[9][0]]
