@@ -1,6 +1,9 @@
 from flask import Flask, request, url_for, redirect, render_template
 from TextAnalysis import TextAnalysis
 from Synonym import Synonym
+from subprocess import call
+
+call(["python", "-m", "nltk.downloader", "wordnet","vader_lexicon"])
 
 app = Flask(__name__)
 
