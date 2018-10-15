@@ -83,4 +83,4 @@ class Synonym:
         if word in self.wordDist:
             return self.wordDist[word]
         else:
-            return -math.log10(1 / self.totalSize), 3
+            return -math.log10(1 / self.totalSize)
