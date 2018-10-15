@@ -8,7 +8,7 @@ call(["python", "-m", "nltk.downloader", "wordnet","vader_lexicon"])
 
 if hasattr(pip, 'main'):
     pip.main(['install', '--upgrade', 'git+https://github.com/shivam5992/textstat'])
-else:
+elif hasattr(pip, '_internal'):
     pip._internal.main(['install', '--upgrade', 'git+https://github.com/shivam5992/textstat'])
 
 app = Flask(__name__)
