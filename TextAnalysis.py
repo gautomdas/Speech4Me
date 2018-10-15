@@ -138,8 +138,11 @@ class TextAnalysis:
         self.data.append([self.dcrStat, self.grade(self.dcrStat)])
 
         ##### INDEX 10 IN DATA: Overall Score #####
-        # Approximate grade
-        self.data.append(textstat.text_standard(self.text))
+        # [INDEX 0] Pure Score              [INDEX 1] Approximate grade
+        # SCORE SCALE: 0 - 20
+        self.txtStd = min(max(textstat.text_standard(self.text, True), 0), 20)
+        self.txtInfo = textstat.text_standard(self.text)
+        self.data.append([self.txtStd, self.txtGrade(self.txtStd)])
 
         return self.data
 
@@ -147,6 +150,15 @@ class TextAnalysis:
     def adjustScore(self, score):
         return min(max(score, 0), 18)
 
+    def txtGrade(self, score, txt):
+        if (score < 1):
+            return "Kindergarten and 1st grade"
+        elif (score < 12):
+            return txt
+        elif (score < 16):
+            return "College-level"
+        else:
+            return "College graduate"
     # Approximate grade from score based on US grade system
     def grade(self, score):
         if (score > 17):
@@ -167,10 +179,10 @@ class TextAnalysis:
             10:"10th grade",
             11:"11th grade",
             12:"12th grade",
-            13:"College freshman",
-            14:"College sophomore",
-            15:"College junior",
-            16:"College senior",
+            13:"College-level",
+            14:"College-level",
+            15:"College-level",
+            16:"College-level",
             17:"College graduate"
         }[gradeApprox]
 
