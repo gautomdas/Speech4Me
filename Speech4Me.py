@@ -54,7 +54,7 @@ def third():
                         else:
                             string_start+= word+" "
                     if(len(choices)>0):
-                        string_start+=" <select class=\"someSel\" id=\"someSel\">"
+                        string_start+=" <select class=\"someSel\" id=\""+word+"\">"
                         string_start+= "<option class=\"others\" value=\""+word+"\">"+word+"</option>"
                         for choice in choices:
                             string_start+= "<option class=\"others\" value=\""+choice[0]+"\">"+choice[0]+"</option>"
