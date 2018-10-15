@@ -80,11 +80,14 @@ class TextAnalysis:
         self.data.append([self.polscore['compound'], self.polscore['neg'], self.polscore['pos'], self.polscore['neu']])
 
         ##### INDEX 1 IN DATA: Sentence Info #####
-        # [INDEX 0] Sentence count          [INDEX 1] Unique wordcount
+        # [INDEX 0] Sentence count          [INDEX 1] Average sentence length
         # [INDEX 2] Syllable count          [INDEX 3] Overall word count
-        # [INDEX 4] Character count
-        self.data.append([textstat.sentence_count(self.text), textstat.lexicon_count(self.text),
-                          textstat.syllable_count(self.text), len(self.splList), len(self.text)])
+        # [INDEX 4] Character count         [INDEX 5] Character count without spaces
+        # [INDEX 6] Avg letters per word    [INDEX 7] Avg syllables per word
+        self.data.append([textstat.sentence_count(self.text), textstat.avg_sentence_length(self.text),
+                          textstat.syllable_count(self.text), len(self.splList), len(self.text, False),
+                          textstat.char_count(self.count, True), textstat.avg_letter_per_word(self.text),
+                          textstat.avg_syllables_per_word(self.text)])
 
         ##### INDEX 2 IN DATA: Flesch Reading Ease #####
         # [INDEX 0] Pure score              [INDEX 1] Approximate grade
