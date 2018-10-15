@@ -31,7 +31,7 @@ class Synonym:
                 result.append([item, round(self.getWord(item), 3)])
             return result
         else:
-            return False
+            return []
 
     ##### MAIN METHOD #####
     # [ARG 1] Word to check for
@@ -42,6 +42,8 @@ class Synonym:
 
     def getChange(self, word, harder=None):
         freqSyn = self.getFreqSyn(word)
+        if not freqSyn:
+            return []
         freqSyn.sort(key=lambda x : x[1])
         finalAns = []
         if harder is None:
