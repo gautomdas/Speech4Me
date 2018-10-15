@@ -2,8 +2,14 @@ from flask import Flask, request, url_for, redirect, render_template
 from TextAnalysis import TextAnalysis
 from Synonym import Synonym
 from subprocess import call
+import pip
 
 call(["python", "-m", "nltk.downloader", "wordnet","vader_lexicon"])
+
+if hasattr(pip, 'main'):
+    pip.main(['install', '--upgrade', 'git+https://github.com/shivam5992/textstat'])
+else:
+    pip._internal.main(['install', '--upgrade', 'git+https://github.com/shivam5992/textstat'])
 
 app = Flask(__name__)
 
