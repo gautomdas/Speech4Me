@@ -3,3 +3,4 @@ nltk
 vaderSentiment
 textstat
 requests
+git+https://github.com/shivam5992/textstat
