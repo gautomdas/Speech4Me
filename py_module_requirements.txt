@@ -2,6 +2,6 @@ IMPORTS:
     flask
     nltk
         ALSO:
-            Run `python -m nltk.downloader all` in Bash console
+            Run `python -m nltk.downloader wordnet vader_lexicon` in Bash console
     vaderSentiment
     textstat
