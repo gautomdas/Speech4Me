@@ -1,0 +1,7 @@
+IMPORTS:
+    flask
+    nltk
+        ALSO:
+            Run `python -m nltk.downloader all` in Bash console
+    vaderSentiment
+    textstat

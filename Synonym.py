@@ -28,7 +28,7 @@ class Synonym:
         result = []
         if syns:
             for item in syns:
-                result.append([item, round(self.getWord(item))])
+                result.append([item, round(self.getWord(item), 3)])
             return result
         else:
             return False
@@ -52,7 +52,7 @@ class Synonym:
                     finalAns.append(item)
         else:
             for item in freqSyn:
-                if item[1] < self.inputFreq:
+                if item[1] <= self.inputFreq:
                     finalAns.append(item)
         finalAns.sort(key=lambda x : x[1])
         return finalAns
@@ -83,4 +83,4 @@ class Synonym:
         if word in self.wordDist:
             return self.wordDist[word]
         else:
-            return math.ceil(-math.log10(1 / self.totalSize))
+            return -math.log10(1 / self.totalSize), 3
