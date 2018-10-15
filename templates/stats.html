@@ -1,0 +1,909 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <style>
+  body {
+  	width: 100vw;
+  	height: 100%;
+  	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  	background-size: 400% 400%;
+  	-webkit-animation: Gradient 15s ease infinite;
+  	-moz-animation: Gradient 15s ease infinite;
+  	animation: Gradient 15s ease infinite;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  @-webkit-keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+
+  @-moz-keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+
+  @keyframes Gradient {
+  	0% {
+  		background-position: 0% 50%
+  	}
+  	50% {
+  		background-position: 100% 50%
+  	}
+  	100% {
+  		background-position: 0% 50%
+  	}
+  }
+  textarea {
+    background-color:rgba(0, 0, 0, 0.5);
+    color: white;
+    resize: none;
+    border: 0 none;
+    outline: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+
+    font-family: 'Quicksand', sans-serif;
+    padding: 30px;
+    height: 60vh;
+    width: 80vw;
+    border-radius: 15px;
+    line-height: 200%;
+      color: #fff;
+
+  }
+  .container {
+    width: 80%;
+    height: 120px;
+    margin: auto;
+      color: #fff;
+  }
+  .one {
+      width: 15%;
+      float: left;
+      color: #fff;
+  }
+  #text{
+    font-size: 100px;color: #fff;
+  }
+  #myLogo{
+    height: 120px;color: #fff;
+  }
+  form {
+    margin: 0 auto;color: #fff;
+    }
+  #button{
+    background-color: transparent;color: #fff;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 50px;
+  }
+
+  .basic{color: #fff;
+      width: 86%;
+      margin: auto;
+  }
+  .Abasic{
+      width: 100%;
+      margin: auto;
+  }
+    h1{
+        color: #fff;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 50px;
+    }
+    h5{
+        color: #fff;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 100px;
+    }
+    .scoreSet{
+        color: #fff;
+        width:40%;
+        margin:auto;
+    }
+    td, th{
+        color: #fff;
+        font-size: 35px;
+    }
+    h3{
+
+        color: #fff !important;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 35px;
+    }
+
+  canvas{
+      margin: auto;
+      width:700px !important;
+      height:400px !important;
+      background-color: rgba(255, 255, 255, 0);
+
+    }
+  h2{
+      color: #fff;
+      font-size:50px !important;
+  }
+  #someid{
+      background-color:rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 0 none;
+    outline: none;
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 5px;
+    width: 60px;
+  }
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+  <section class="container">
+      <div class="one"><img id="myLogo" src="../static/logo.svg"></img></div>
+      <div class="two" id="text">&nbsp; Speech for Me</div>
+  </section>
+
+
+<section class="basic">
+    <h1 align="center">Text Sentiment</h1>
+    <table style="width:100%">
+      <tr>
+        <td align="right" style="width:50%">Compounded Score:</td>
+        <td align="left" style="width:50%">{{ comp }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Negative Connotation:</td>
+        <td align="left" style="width:50%">{{ neg }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Positive Connotation:</td>
+        <td align="left" style="width:50%">{{ pos }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Neutral Connotation:</td>
+        <td align="left" style="width:50%">{{ neut }}</td>
+      </tr>
+    </table>
+</section>
+
+<section class="basic">
+    <h1 align="center">General Text Information</h1>
+    <table style="width:100%">
+      <tr>
+        <td align="right" style="width:50%">Sentence Count:</td>
+        <td align="left" style="width:50%">{{ sent }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Average Sentence Length:</td>
+        <td align="left" style="width:50%">{{ avg_sl }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Syllable Count:</td>
+        <td align="left" style="width:50%">{{ syll }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Word Count:</td>
+        <td align="left" style="width:50%">{{ word }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Character Count:</td>
+        <td align="left" style="width:50%">{{ char }}</td>
+      </tr>
+
+      <tr>
+        <td align="right" style="width:50%">Average Characters per Per:</td>
+        <td align="left" style="width:50%">{{ avg_c }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:50%">Average Syllables per Word:</td>
+        <td align="left" style="width:50%">{{ avg_syll }}</td>
+      </tr>
+    </table>
+</section>
+
+<section class="basic" style="margin:auto">
+    <h1 align="center">Approximate Grades</h1>
+    <table style="width:100%; margin: auto">
+      <tr>
+        <th align="right" style="width:33%"></th>
+        <th align="center" style="width:33%">Score</th>
+        <th align="center" style="width:33%">Grade</th>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Flesch Reading Ease:</td>
+        <td align="center" style="width:33%">{{ fre_s }}</td>
+        <td align="center" style="width:33%">{{ fre_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Flesch-Kincaid Grade:</td>
+        <td align="center" style="width:33%">{{ fkg_s }}</td>
+        <td align="center" style="width:33%">{{ fkg_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Gunning Fog Index:</td>
+        <td align="center" style="width:33%">{{ gfi_s }}</td>
+        <td align="center" style="width:33%">{{ gfi_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">SMOG Index:</td>
+        <td align="center" style="width:33%">{{ si_s }}</td>
+        <td align="center" style="width:33%">{{ si_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Automated Readability Index:</td>
+        <td align="center" style="width:33%">{{ ari_s }}</td>
+        <td align="center" style="width:33%">{{ ari_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Coleman-Liau Index:</td>
+        <td align="center" style="width:33%">{{ cli_s }}</td>
+        <td align="center" style="width:33%">{{ cli_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Linsear Write Index:</td>
+        <td align="center" style="width:33%">{{ lwi_s }}</td>
+        <td align="center" style="width:33%">{{ lwi_g }}</td>
+      </tr>
+      <tr>
+        <td align="right" style="width:33%">Dale-Chall Readability:</td>
+        <td align="center" style="width:33%">{{ dcr_s }}</td>
+        <td align="center" style="width:33%">{{ dcr_g }}</td>
+      </tr>
+
+    </table>
+</section>
+<br/>
+<br/>
+<br/>
+
+  <h2 align="center">Text Sentiment Graph</h2>
+<canvas id="myChart"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var new_data = {{ dataA }}
+console.log(new_data)
+new Chart(document.getElementById("myChart"), {
+    type: 'bar',
+    data: {
+      labels: ["Comp", "Neg", "Pos", "Neut"],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff"],
+          data: new_data
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+  <br>
+
+<style>
+
+.box {
+  margin: 0 auto;
+  background: rgba(0,0,0,0);
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 50%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+    #tittle{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 45px; !important;
+    }
+     #context{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 18px; !important;
+    }
+</style>
+<div class="box">
+	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+        <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
+  </div></a>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div id="tittle">Chart Info</div>
+        <div id="context">
+            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
+            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
+            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
+            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
+            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
+            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
+
+        </div>
+	</div>
+</div>
+
+
+  <h2 align="center">General Text Info</h2>
+<canvas id="myChartB"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var new_data = {{ gen_text }}
+console.log(new_data)
+new Chart(document.getElementById("myChartB"), {
+    type: 'bar',
+    data: {
+      labels: ["Sentences", "Average SL", "avg_words","Average Syls"],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"],
+          data: {{ gen_text }}
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+  <br>
+  <div style="align-content: center;text-align: center; align:center;">
+
+<style>
+
+.box {
+  margin: 0 auto;
+  background: rgba(0,0,0,0);
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 50%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+    #tittle{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 45px; !important;
+    }
+     #context{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 18px; !important;
+    }
+</style>
+<div class="box">
+	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+        <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
+  </div></a>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div id="tittle">Chart Info</div>
+        <div id="context">
+            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
+            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
+            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
+            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
+            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
+            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
+
+        </div>
+	</div>
+</div>
+
+
+   <h2 align="center">General Text Info (Cont.)</h2>
+<canvas id="myChartNE"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var new_data = {{ gen_text }}
+console.log(new_data)
+new Chart(document.getElementById("myChartNE"), {
+    type: 'bar',
+    data: {
+      labels: ["Syllable Count", "Word Count", "Character Count"],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"],
+          data: {{ cont_gen }}
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+  <br>
+
+<style>
+
+.box {
+  margin: 0 auto;
+  background: rgba(0,0,0,0);
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 50%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+    #tittle{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 45px; !important;
+    }
+     #context{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 18px; !important;
+    }
+</style>
+<div class="box">
+	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+        <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
+  </div></a>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div id="tittle">Chart Info</div>
+        <div id="context">
+            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
+            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
+            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
+            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
+            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
+            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
+
+        </div>
+	</div>
+</div>
+
+
+
+  <h2 align="center">Approximate Grades</h2>
+<canvas id="myChartC"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var dats = {{ all_d }}
+console.log(dats);
+new Chart(document.getElementById("myChartC"), {
+    type: 'bar',
+    data: {
+      labels: ['fre_s', 'fkg_s', 'gfi_s', 'si_s', ' ari_s', 'cli_s', 'lwi_s', 'dcr_s'],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"],
+          data: dats
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+  <br>
+
+<style>
+
+.box {
+  margin: 0 auto;
+  background: rgba(0,0,0,0);
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 50%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+    #tittle{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 45px; !important;
+    }
+     #context{
+        color: #000000;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 18px; !important;
+    }
+</style>
+<div class="box">
+	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+        <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
+  </div></a>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div id="tittle">Chart Info</div>
+        <div id="context">
+            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
+            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
+            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
+            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
+            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
+            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
+            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
+
+        </div>
+	</div>
+</div>
+
+<h2 align="center">Overall Grade</h2>
+  <h3 align="center">Your overall grade was: {{ over }}</h3>
+  <h3 align="center"><i>You can now enter in the grade level you prefer. Please numbers only ('10', '5'):</i></h3>
+  <div style="text-align:center;">
+    <form action="{{ url_for('review') }}" method="post">
+        <input type="number" name="someid" id="someid"/>
+        <br/>
+        <input id="button" type="submit">
+    </form>
+  </div>
+</body>
+</html>

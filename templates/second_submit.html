@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    <style>
+  <link rel="icon" type="image/svg+xml" href="https://i.imgur.com/c9497iS.png">
+  <title>{% block title %}SpeechForMe{% endblock %}</title>
+  <style>
   body {
   	width: 100vw;
-  	height: 100%;
+  	height: 90vh;
   	color: #fff;
   	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   	background-size: 400% 400%;
@@ -101,55 +101,6 @@
     font-size: 50px;
   }
 
-  .basic{
-      width: 80%;
-      margin: auto;
-  }
-  .Abasic{
-      width: 100%;
-      margin: auto;
-  }
-    h1{
-        font-size: 50px;
-    }
-    h5{
-        font-size: 100px;
-    }
-    .scoreSet{
-        width:40%;
-        margin:auto;
-    }
-    td, th{
-        font-size: 35px;
-    }
-    p{
-        font-size: 35px;
-        line-height: 1.9;
-    }
-
-  canvas{
-      margin: auto;
-      width:700px !important;
-      height:400px !important;
-      background-color: rgba(255, 255, 255, 0);
-
-    }
-  h2{
-      font-size:50px !important;
-  }
-  #edit_text{
-      width: 80%;
-      margin: auto;
-  }
-    select {
-      text-align: center;
-      text-align-last: center;
-      /* webkit*/
-    }
-    option {
-      text-align: center;
-      /* reset to left*/
-    }
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
@@ -158,40 +109,11 @@
       <div class="one"><img id="myLogo" src="../static/logo.svg"></img></div>
       <div class="two" id="text">&nbsp; Speech for Me</div>
   </section>
-<style>
-.someSel {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    overflow: hidden;
-    padding: 5px 8px;
-    border: none;
-    box-shadow: none;
-    background: RGBA(0, 0, 0, 0.5);
-    background-image: none;
-    -webkit-appearance: none;
-    outline: none;
-    font-size: 35px;
-    color: white;
-    font-family: 'Quicksand', sans-serif;
-}
-.others{
-    font-size: 35px;
-    font-family: 'Quicksand', sans-serif;
-    color: white;
-}
-</style>
-<br/>
-<div style="width: 80%; text-align: center; margin: auto;">
-  <h2>You wanted a {{ type_a }} text. These are words we considered to be {{ type_a }}. Click the grey boxes to start making changes: </h2>
-</div>
-<form action="{{ url_for('submit') }}" method="post">
-    <div id="edit_text" style="text-align:left;">
-    {% include 'inserte.html' %}
-    </div>
-    <div style="text-align: center">
-    <input id="button" type="submit">
-    </div>
-</form>
+  <div style="text-align:center;">
+    <form action="{{ url_for('stats') }}" method="post">
+        <textarea name="text"></textarea>
+        <input id="button" type="submit">
+    </form>
+  </div>
 </body>
 </html>
-
