@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <style>
   body {
   	width: 100vw;
-  	height: 90vh;
+  	height: 160vh;
   	color: #fff;
   	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   	background-size: 400% 400%;
@@ -120,6 +122,31 @@
     td, th{
         font-size: 35px;
     }
+    p{
+        font-size: 35px;
+    }
+
+  canvas{
+      margin: auto;
+      width:700px !important;
+      height:400px !important;
+      background-color: rgba(255, 255, 255, 0);
+
+    }
+  h2{
+      font-size:50px !important;
+  }
+  #someid{
+      background-color:rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 0 none;
+    outline: none;
+    font-size: 25px;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 5px;
+    width: 60px;
+  }
   </style>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
@@ -153,7 +180,7 @@
 </section>
 
 <section class="basic">
-    <h1 align="center">General Text Info</h1>
+    <h1 align="center">General Text Information</h1>
     <table style="width:100%">
       <tr>
         <td align="right" style="width:50%">Setence Count:</td>
@@ -175,31 +202,10 @@
         <td align="right" style="width:50%">Character Count:</td>
         <td align="left" style="width:50%">{{ char }}</td>
       </tr>
-    </table>
-</section>
 
-<section class="basic">
-    <h1 align="center">Flesch Reading Ease</h1>
-    <table style="width:100%">
       <tr>
-        <td align="right" style="width:50%">Setence Count:</td>
-        <td align="left" style="width:50%">{{ sent }}</td>
-      </tr>
-      <tr>
-        <td align="right" style="width:50%">Unique Word Count:</td>
-        <td align="left" style="width:50%">{{ uniq }}</td>
-      </tr>
-      <tr>
-        <td align="right" style="width:50%">Syllable Count:</td>
-        <td align="left" style="width:50%">{{ syll }}</td>
-      </tr>
-      <tr>
-        <td align="right" style="width:50%">Word Count:</td>
-        <td align="left" style="width:50%">{{ word }}</td>
-      </tr>
-      <tr>
-        <td align="right" style="width:50%">Character Count:</td>
-        <td align="left" style="width:50%">{{ char }}</td>
+        <td align="right" style="width:50%">Average Word per Char:</td>
+        <td align="left" style="width:50%">{{ avg_c }}</td>
       </tr>
     </table>
 </section>
@@ -255,13 +261,191 @@
 
     </table>
 </section>
+<br/>
+<br/>
+<br/>
 
-<div style="text-align:center;">
-    <form action="{{ url_for('submit') }}" method="post">
+  <h2 align="center">Text Sentiment Graph</h2>
+<canvas id="myChart"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var new_data = {{ dataA }}
+console.log(new_data)
+new Chart(document.getElementById("myChart"), {
+    type: 'bar',
+    data: {
+      labels: ["Comp", "Neg", "Pos", "Neut"],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff"],
+          data: new_data
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+
+
+  <h2 align="center">General Text Info</h2>
+<canvas id="myChartB"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var new_data = {{ gen_text }}
+console.log(new_data)
+new Chart(document.getElementById("myChartB"), {
+    type: 'bar',
+    data: {
+      labels: ["Sentences", "Uniqueness", "Syllables", "Words"],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"],
+          data: new_data
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+
+  <h2 align="center">Approximate Grades</h2>
+<canvas id="myChartC"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var dats = {{ all_d }}
+console.log(dats);
+new Chart(document.getElementById("myChartC"), {
+    type: 'bar',
+    data: {
+      labels: ['fre_s', 'fkg_s', 'gfi_s', 'si_s', ' ari_s', 'cli_s', 'lwi_s', 'dcr_s'],
+      datasets: [
+        {
+          fontSize:30,
+          backgroundColor: ["#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff", "#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"],
+          data: dats
+        },
+
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        xAxes: [{
+          display: true,
+          gridLines: {
+            display: false ,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+              fontFamily: "Quicksand"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          gridLines: {
+            display:true,
+            color: "#FFFFFF"
+          },
+          ticks: {
+            beginAtZero:true,
+            fontColor: 'white',
+              fontSize: 40,
+
+              fontFamily: "Quicksand"
+          }
+        }]
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false
+});
+
+</script>
+
+<h2 align="center">Overall Grade</h2>
+  <p align="center">Your overall grade was: {{ over }}</p>
+  <p align="center"><i>You can now enter in the grade level you prefer. Please numbers only ('10', '5'):</i></p>
+  <div style="text-align:center;">
+    <form action="{{ url_for('third') }}" method="post">
+        <input type="number" name="someid" id="someid"/>
+        <br/>
         <input id="button" type="submit">
     </form>
   </div>
-
-<p>{{ var1 }}</p>
 </body>
 </html>
