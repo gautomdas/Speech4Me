@@ -81,7 +81,57 @@ def review():
         string_start += "</p>"
         print(string_start)
     else:
-        print("jiknkies")
+        type_e = "easier"
+        string_start = "<p>"
+
+        for line in all_lines:
+            print("FLAG")
+            words = line.split(" ")
+            print(words)
+            for word in words:
+                tot = []
+                tot.append(word)
+                print("_" * 20)
+                print(word)
+                per_flag = False
+                sec_flag = False
+                if "." in word:
+                    per_flag = True
+                    word = word.split(".")[0]
+                choices = textSyn.getChange(word, False)
+                if (len(word) > 3):
+                    print("HERE")
+                    if (len(choices) == 0):
+                        if per_flag:
+                            string_start += word + ". "
+                            sec_flag = True
+                        else:
+                            string_start += word + " "
+                    if (len(choices) > 0):
+                        string_start += " <select class=\"someSel\" name=\"" + word + "\">"
+                        string_start += "<option class=\"others\" value=\"" + word + "\">" + word + "</option>"
+                        for choice in choices:
+                            string_start += "<option class=\"others\" value=\"" + choice[0] + "\">" + choice[
+                                0] + "</option>"
+                        string_start += "</select></span> "
+                else:
+                    if per_flag:
+                        string_start += word + ". "
+                        sec_flag = True
+                    else:
+                        string_start += word + " "
+                if per_flag and not sec_flag:
+                    string_start += ". "
+                global word
+                global words_all
+                global tot
+                tot.append(word)
+                words_all.append(tot)
+
+            string_start += "<br>"
+            words_all += ["!BREAK!"]
+        string_start += "</p>"
+        print(string_start)
 
     Html_file = open("templates/generated_paragraph.html", "w")
     Html_file.write(string_start)
