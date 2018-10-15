@@ -2,6 +2,9 @@ IMPORTS:
     flask
     nltk
         ALSO:
-            Run `python -m nltk.downloader all` in Bash console
+            Run `python -m nltk.downloader wordnet vader_lexicon` in Bash console
     vaderSentiment
     textstat
+        PYPI (pip) VERSION OUTDATED:
+            Run `pip install --upgrade git+https://github.com/shivam5992/textstat` in Bash console
+    requests
