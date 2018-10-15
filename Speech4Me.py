@@ -24,6 +24,9 @@ def home():
 
 @app.route('/review', methods=['GET', 'POST'])
 def review():
+    global word
+    global words_all
+    global tot
 
     grade = request.form['someid']
     print("id: "+grade)
@@ -70,9 +73,6 @@ def review():
                         string_start += word + " "
                 if per_flag and not sec_flag:
                     string_start+=". "
-                global word
-                global words_all
-                global tot
                 tot.append(word)
                 words_all.append(tot)
 
@@ -122,9 +122,6 @@ def review():
                         string_start += word + " "
                 if per_flag and not sec_flag:
                     string_start += ". "
-                global word
-                global words_all
-                global tot
                 tot.append(word)
                 words_all.append(tot)
 
