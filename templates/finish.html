@@ -79,10 +79,10 @@
       float: left;
   }
   #text{
-    font-size: 100px;
+    font-size: calc(2em + 6vmin);
   }
   #myLogo{
-    height: 120px;
+    height: calc(4em + 2vmin);
   }
   form {
     margin: 0 auto;
@@ -109,7 +109,7 @@
   </section>
   <div style="text-align:center;">
     <form action="{{ url_for('stats') }}" method="post">
-        <textarea name="text">{{ fina }}</textarea>
+        <textarea name="text">{{ final }}</textarea>
         <input id="button" type="submit">
     </form>
   </div>

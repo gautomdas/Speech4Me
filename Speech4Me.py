@@ -2,9 +2,12 @@ from flask import Flask, request, url_for, redirect, render_template, session
 from TextAnalysis import TextAnalysis
 from Synonym import Synonym
 from subprocess import call
+# from webui import WebUI
+from os.path import dirname, abspath, join
 
 
 app = Flask(__name__)
+# ui = WebUI(app, debug=True)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 regular_calc = ""
@@ -23,6 +26,8 @@ def home():
 @app.route('/stats', methods=['POST'])
 def stats():
     text = request.form['text']
+    if text is '':
+        return ('', 204)
     print(text)
     session["all_text"]=text
     data = textA.auto(text)
@@ -44,6 +49,8 @@ def review():
     tot = []
     session["words_all"] = []
     grade = request.form['someid']
+    if not(grade.isdigit()):
+         return ('', 204)
     print("id: "+grade)
     all_lines = session["all_text"].splitlines()
     final = []
@@ -145,7 +152,7 @@ def review():
         string_start += "</p>"
         print(string_start)
 
-    Html_file = open("templates/generated_paragraph.html", "w")
+    Html_file = open(join(dirname(abspath(__file__)), "templates/generated_paragraph.html"), "w")
     Html_file.write(string_start)
     Html_file.close()
     return render_template('review.html', type_a = type_e)
@@ -174,7 +181,7 @@ def finish():
             print(wordList)
             print (str(select))  # just to see what select is
     print(edited)
-    return render_template('finish.html', fina=edited)
+    return render_template('finish.html', final=edited)
 
 
 # TO GET SYNONYMS OF A WORD
@@ -183,4 +190,4 @@ def finish():
 # textSyn.getChange(word, False) - Returns 2d list of synonyms considered "easier"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()

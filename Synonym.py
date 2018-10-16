@@ -1,6 +1,7 @@
 from itertools import chain
 from nltk.corpus import wordnet
 import math
+from os.path import join, abspath, dirname
 
 
 # Returns a list with simply False if no synonyms found.
@@ -63,15 +64,16 @@ class Synonym:
     # Reads a file and returns a dictionary with words and frequency number.
     # Frequency number is the negative log of the number of occurrences divided by total words in set.
     # frequency = -log10(words_wanted/total_words)
-    def readFile(self, filename="en_full.txt"):
+    def readFile(self, filename=join(dirname(abspath(__file__)), "en_full.txt")):
         wordFreq = dict()
         with open(filename, 'r') as file:
             lines = file.readlines()
             ##### FOR VARIABLE-SIZED CORPUS BASE #####
+            # file.seek(0)
             # self.totalSize = sum([int(item) for item in file.read().split() if item.isdigit()])
 
             # Only one specific (not-actually-a) corpus used, so total words in "corpus" known
-            self.totalSize = 534751778
+            self.totalSize = 530663789
 
         for line in lines:
             info = line.split()
