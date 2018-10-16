@@ -277,9 +277,42 @@
         <td align="center" style="width:33%">{{ dcr_s }}</td>
         <td align="center" style="width:33%">{{ dcr_g }}</td>
       </tr>
+      <tr>
+          <td align="right" style="width:33%">TextStat Standard:</td>
+        <td align="center" style="width:33%">{{ overG }}</td>
+        <td align="center" style="width:33%">{{ over }}</td>
+      </tr>
 
     </table>
+    <p><b>NOTE:</b> Always remember these scores and indices (indexes) are general guidelines. Additionally, many of these tests are very similar, and can also be somewhat inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).
+            Additionally, the programming used to calculate the scores is not fully accurate due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
+            <p>Scores based on the US grading system are implied to be easier than the lowest grades when below 0, and harder than the US grade system when above the normal grade levels. Each grading system may also use different scales. A score on either extreme suggests not enough information or non-English words.</p>
+
 </section>
+  <div class="box">
+	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+        <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
+  </div></a>
+</div>
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<a class="close" href="#">&times;</a>
+		<div id="tittle">Readability Score Info</div>
+        <div id="context">
+            <p>Raw score of formulas. "Years of education" and "US grade level" are generally used interchangeably.</p>
+            <p><b>FRE</b>: This refers to the Flesch Reading ease score. Scale of readability from easiest (high) to hardest (low).</p>
+            <p><b>FKG</b>: This refers to the Flesch-Kincaid grade. Estimates years of education needed to understand the text. Somewhat based off Flesch Reading ease. </p>
+            <p><b>Fog</b>: This refers to the Gunning fog index. Estimates years of education needed to understand the text.</p>
+            <p><b>SMOG</b>: This refers to the SMOG grade. Estimates years of education needed to understand the text; most used for health messages.</p>
+            <p><b>ARI</b>: This refers to the automated readability index (ARI). Based on US grade system, with a different scale. Uses characters per word -- less accurate but faster to calculate.</p>
+            <p><b>CLI</b>: This refers to the Coleman-Liau index. Designed to output a grade level using easily calculated information -- characters per word, not syllables.</p>
+            <p><b>LWI</b>: This refers to the Linsear Write index. Supposedly designed by the US Air Force to calculate readability of technical manuals. Outputs approx. US grade level.</p>
+            <p><b>CLI</b>: This refers to the Dale-Chall readability score. Uses a list of 3000 simple words to calculate difficulty on a US grade level scale.</p>
+            <p><b>Text Std.:</b> This refers to the TextStat standard. Uses a compilation of the above scores to generate a grade value.</p>
+        </div>
+	</div>
+</div>
 <br/>
 <br/>
 <br/>
@@ -413,30 +446,24 @@ new Chart(document.getElementById("myChart"), {
     }
 </style>
 <div class="box">
-	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+	<a class="button" href="#popup2"> <div style="align-content: center;text-align: center; align:center;color:#fff">
         <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
   </div></a>
 </div>
 
-<div id="popup1" class="overlay">
+<div id="popup2" class="overlay">
 	<div class="popup">
 		<a class="close" href="#">&times;</a>
 		<div id="tittle">Chart Info</div>
         <div id="context">
-            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
-            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
-            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
-            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
-            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
-            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
-
+            <p><b>Pos/Neg:</b> The estimated positive and negative connotation of the text.</p>
+            <p><b>Comp:</b> The compound score, based purely on negative and positive connotation.</p>
+            <p><b>Neut:</b> The estimated neutrality of the text. This is not accounted in the compound score, so a high compound score does not necessarily mean a high correlation.</p>
         </div>
 	</div>
 </div>
 
-
+  <!--
   <h2 align="center">General Text Info</h2>
 <canvas id="myChartB"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -495,7 +522,7 @@ new Chart(document.getElementById("myChartB"), {
 </script>
   <br>
   <div style="align-content: center;text-align: center; align:center;">
-
+-->
 <style>
 
 .box {
@@ -566,6 +593,7 @@ new Chart(document.getElementById("myChartB"), {
         font-size: 18px; !important;
     }
 </style>
+  <!--
 <div class="box">
 	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
         <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
@@ -577,15 +605,16 @@ new Chart(document.getElementById("myChartB"), {
 		<a class="close" href="#">&times;</a>
 		<div id="tittle">Chart Info</div>
         <div id="context">
-            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
-            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
-            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
-            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
-            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
-            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
-
+            <p><b>NOTE:</b> Always remember these scores and indices (indexes) are general guidelines. Additionally, many of these tests are very similar, and can also be somewhat inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).
+            Additionally, the programming used to calculate the scores is not fully accurate due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
+            <p><b>fre_s</b>: This refers to the Flesch Reading ease score. A higher score on this test indicates easier-to-read material, and a lower score indicates harder-to-read material.</p>
+            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid grade. This presents a score as a US grade level, or the years of education generally required to understand the text. Limitations include </p>
+            <p><b>gfi_s</b>: This refers to the Gunning fog index. This estimates the number of years of education needed to understand some text. </p>
+            <p><b>si_s</b>: This refers to the SMOG grade. This estimates the years of education needed to understand text, and is most used for health messages.</p>
+            <p><b>ari_s</b>: This refers to the automated readability index (ARI). This is a readability test for English texts, designed to gauge the understandability of a text. It uses characters per word, which can be less accurate but faster to calculate.</p>
+            <p><b>cli_s</b>: This refers to the Coleman-Liau index. Similarly to ARI, this uses characters rather than syllables. It is designed to output a grade level using easily calculated information.</p>
+            <p><b>lwi_s</b>: This refers to the Linsear Write index. This was supposedly designed by the US Air Force to calculate readability of technical manuals. It outputs an approximate US grade level.</p>
+            <p><b>cli_s</b>: This refers to the Dale-Chall readability score. This uses a list of 3000 words that fourth-graders could understand to calculate difficulty on a US grade level scale.</p>
         </div>
 	</div>
 </div>
@@ -648,6 +677,7 @@ new Chart(document.getElementById("myChartNE"), {
 
 </script>
   <br>
+-->
 
 <style>
 
@@ -719,6 +749,7 @@ new Chart(document.getElementById("myChartNE"), {
         font-size: 18px; !important;
     }
 </style>
+  <!--
 <div class="box">
 	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
         <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
@@ -742,6 +773,7 @@ new Chart(document.getElementById("myChartNE"), {
         </div>
 	</div>
 </div>
+-->
 
 
 
@@ -754,7 +786,7 @@ console.log(dats);
 new Chart(document.getElementById("myChartC"), {
     type: 'bar',
     data: {
-      labels: ['fre_s', 'fkg_s', 'gfi_s', 'si_s', ' ari_s', 'cli_s', 'lwi_s', 'dcr_s'],
+      labels: ['FRE', 'FKG', 'FOG', 'SMOG', 'ARI', 'CLI', 'LWI', 'DCR', 'Text Std.'],
       datasets: [
         {
           fontSize:30,
@@ -802,7 +834,9 @@ new Chart(document.getElementById("myChartC"), {
 
 </script>
   <br>
-
+<p><b>NOTE:</b> Always remember these scores and indices (indexes) are general guidelines. Additionally, many of these tests are very similar, and can also be somewhat inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).
+            Additionally, the programming used to calculate the scores is not fully accurate due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
+  <p>Scores are normalized (and graphed) to within 0-100%, with 100% meaning hardest and 0% meaning easiest.</p>
 <style>
 
 .box {
@@ -854,6 +888,7 @@ new Chart(document.getElementById("myChartC"), {
   overflow: auto;
 }
 
+
 @media screen and (max-width: 700px){
   .box{
     width: 70%;
@@ -873,26 +908,29 @@ new Chart(document.getElementById("myChartC"), {
         font-size: 18px; !important;
     }
 </style>
+
 <div class="box">
-	<a class="button" href="#popup1"> <div style="align-content: center;text-align: center; align:center;color:#fff">
+	<a class="button" href="#popup3"> <div style="align-content: center;text-align: center; align:center;color:#fff">
         <i style="color:white;" class="fas fa-question-circle fa-3x"></i>
   </div></a>
 </div>
 
-<div id="popup1" class="overlay">
+
+<div id="popup3" class="overlay">
 	<div class="popup">
 		<a class="close" href="#">&times;</a>
-		<div id="tittle">Chart Info</div>
+		<div id="tittle">Label Info</div>
         <div id="context">
-            <p><b>fre_s</b>: This refers to the Flesch Reading Ease score. This score on the test will tell you roughly what level of education someone will need to be able to read a piece of text easily.</p>
-            <p><b>fkg_s</b>: This refers to the Flesch-Kincaid Grading score. This score uses the flesch reading ease score but has different weights.</p>
-            <p><b>gfi_s</b>: This refers to the Gunning Fog Index. This is a reading test for english. </p>
-            <p><b>si_s</b>: This refers to the Smog Index. estimates the years of education needed to understand a piece of writing.</p>
-            <p><b>ari_s</b>: This refers to the Automated Readability Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Coleman-Liau Index. This is used to gauge the understandability.</p>
-            <p><b>lwi_s</b>: This refers to the Linsear Write Index. This is a readability test for English texts, designed to gauge the understandability of a text.</p>
-            <p><b>cli_s</b>: This refers to the Dale-Chall Readbility Score. This is used to gauge the understandability.</p>
-
+            <p>"Years of education" and "US grade level" are generally used interchangeably.</p>
+            <p><b>FRE</b>: This refers to the Flesch Reading ease score. Scale of readability from easiest (high) to hardest (low). Remember that on this graph, 100(%) is hardest, 0(%) is easiest.</p>
+            <p><b>FKG</b>: This refers to the Flesch-Kincaid grade. Estimates years of education needed to understand the text. Somewhat based off Flesch Reading ease. </p>
+            <p><b>Fog</b>: This refers to the Gunning fog index. Estimates years of education needed to understand the text.</p>
+            <p><b>SMOG</b>: This refers to the SMOG grade. Estimates years of education needed to understand the text; most used for health messages.</p>
+            <p><b>ARI</b>: This refers to the automated readability index (ARI). Based on US grade system, with a different scale. Uses characters per word -- less accurate but faster to calculate.</p>
+            <p><b>CLI</b>: This refers to the Coleman-Liau index. Designed to output a grade level using easily calculated information -- characters per word, not syllables.</p>
+            <p><b>LWI</b>: This refers to the Linsear Write index. Supposedly designed by the US Air Force to calculate readability of technical manuals. Outputs approx. US grade level.</p>
+            <p><b>CLI</b>: This refers to the Dale-Chall readability score. Uses a list of 3000 simple words to calculate difficulty on a US grade level scale.</p>
+            <p><b>Text Std.:</b> This refers to the TextStat standard. Uses a compilation of the above scores to generate a grade value.</p>
         </div>
 	</div>
 </div>
