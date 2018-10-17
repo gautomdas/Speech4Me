@@ -94,8 +94,8 @@ class TextAnalysis:
         # [INDEX 0] Pure score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 100
         self.freRaw = textstat.flesch_reading_ease(self.text)
-        self.freStat = abs(min(max(self.freRaw, 0), 100) - 100)
-        self.data.append([self.freRaw, self.freGrade(self.freStat), self.freStat])
+        self.freStat = min(max(self.freRaw, 0), 100)
+        self.data.append([self.freRaw, self.freGrade(self.freStat), abs(self.freStat - 100)])
 
         ##### INDEX 3 IN DATA: Flesch-Kincaid Grade #####
         # [INDEX 0] Pure score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
