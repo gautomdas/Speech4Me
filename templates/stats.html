@@ -382,55 +382,54 @@ new Chart(document.getElementById("myChart"), {
         <th align="center" style="width:33%">Grade</th>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Flesch Reading Ease:</td>
+        <td align="right" style="width:33%">Flesch Reading Ease (0-100):</td>
         <td align="center" style="width:33%">{{ fre_s }}</td>
         <td align="center" style="width:33%">{{ fre_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Flesch-Kincaid Grade:</td>
+        <td align="right" style="width:33%">Flesch-Kincaid Grade (0-18):</td>
         <td align="center" style="width:33%">{{ fkg_s }}</td>
         <td align="center" style="width:33%">{{ fkg_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Gunning Fog Index:</td>
+        <td align="right" style="width:33%">Gunning Fog Index (0-18):</td>
         <td align="center" style="width:33%">{{ gfi_s }}</td>
         <td align="center" style="width:33%">{{ gfi_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">SMOG Index:</td>
+        <td align="right" style="width:33%">SMOG Index (0-18):</td>
         <td align="center" style="width:33%">{{ si_s }}</td>
         <td align="center" style="width:33%">{{ si_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Automated Readability Index:</td>
+        <td align="right" style="width:33%">Automated Readability Index (0-14):</td>
         <td align="center" style="width:33%">{{ ari_s }}</td>
         <td align="center" style="width:33%">{{ ari_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Coleman-Liau Index:</td>
+        <td align="right" style="width:33%">Coleman-Liau Index (0-18):</td>
         <td align="center" style="width:33%">{{ cli_s }}</td>
         <td align="center" style="width:33%">{{ cli_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Linsear Write Index:</td>
+        <td align="right" style="width:33%">Linsear Write Index (0-18):</td>
         <td align="center" style="width:33%">{{ lwi_s }}</td>
         <td align="center" style="width:33%">{{ lwi_g }}</td>
       </tr>
       <tr>
-        <td align="right" style="width:33%">Dale-Chall Readability:</td>
+        <td align="right" style="width:33%">Dale-Chall Readability (0-10):</td>
         <td align="center" style="width:33%">{{ dcr_s }}</td>
         <td align="center" style="width:33%">{{ dcr_g }}</td>
       </tr>
       <tr>
-          <td align="right" style="width:33%">TextStat Standard:</td>
+          <td align="right" style="width:33%">TextStat Standard (0-20):</td>
         <td align="center" style="width:33%">{{ overG }}</td>
         <td align="center" style="width:33%">{{ over }}</td>
       </tr>
 
     </table>
-    <p style="font-size:14px;"><b>NOTE:</b> Always remember these scores and indices (indexes) are general guidelines. Additionally, many of these tests are very similar, and can also be somewhat inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).
-            Additionally, the programming used to calculate the scores is not fully accurate due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
-            <p style="font-size:14px";>Scores based on the US grading system are implied to be easier than the lowest grades when below 0, and harder than the US grade system when above the normal grade levels. Each grading system may also use different scales. A score on either extreme suggests not enough information or non-English words.</p>
+    <p style="font-size:14px;"><b>NOTE:</b>The grading scale for each system can vary. Additionally, always remember these scores and indices (indexes) are general guidelines. Many of these tests are very similar, and may also be inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).</p>
+            <p style="font-size:14px;">The programming used to calculate the scores is also not fully accurate within what the readability formulas should be calculated as due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
     <br/>
     <br/>
   <h2 align="center">Grade Graph</h2>
