@@ -202,4 +202,4 @@ def finish():
 
 if __name__ == '__main__':
     context = ('fullchain.pem', 'privkey.pem')
-    app.run(host='0.0.0.0', port = 80, ssl_context=context)
+    app.run(host='0.0.0.0', port = 443, ssl_context=context)
