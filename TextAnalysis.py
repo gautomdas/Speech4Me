@@ -161,6 +161,8 @@ class TextAnalysis:
         return min(max(score, 0), 18)
 
     def txtGrade(self, score, txt):
+        if (score == 0):
+            return "Kindergarten"
         if (score < 1):
             return "Kindergarten and 1st grade"
         elif (score < 12):
