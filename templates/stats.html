@@ -260,6 +260,7 @@
         <td align="left" style="width:50%">{{ neut }}</td>
       </tr>
     </table>
+    <p style="font-size:20px;">A high compound score only factors in positive and negative connotation, so a high neutral connotation may effectively override a high or low compound score.</p>
       <h2 align="center">Text Sentiment Graph</h2>
     <br/>
     <br/>
@@ -332,7 +333,7 @@ new Chart(document.getElementById("myChart"), {
         <div id="context">
             <p><b>Pos/Neg:</b> The estimated positive and negative connotation of the text.</p>
             <p><b>Comp:</b> The compound score, based purely on negative and positive connotation.</p>
-            <p><b>Neut:</b> The estimated neutrality of the text. This is not accounted in the compound score, so a high compound score does not necessarily mean a high correlation.</p>
+            <p><b>Neut:</b> The estimated neutrality of the text. This is not accounted in the compound score, so <b>a high compound score does not necessarily mean a high correlation towards positive or negative.</b></p>
         </div>
 	</div>
 </div>
