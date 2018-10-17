@@ -201,4 +201,5 @@ def finish():
 # textSyn.getChange(word, False) - Returns 2d list of synonyms considered "easier"
 
 if __name__ == '__main__':
-    app.run()
+    context = ('fullchain.pem', 'privkey.pem')
+    app.run(host='0.0.0.0', port = 80, ssl_context=context)
