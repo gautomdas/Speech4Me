@@ -95,56 +95,56 @@ class TextAnalysis:
         # SCORE SCALE: 0 - 100
         self.freRaw = textstat.flesch_reading_ease(self.text)
         self.freStat = min(max(self.freRaw, 0), 100)
-        self.data.append([self.freRaw, self.freGrade(self.freStat), abs(self.freStat - 100)])
+        self.data.append([round(self.freStat, 3), self.freGrade(self.freStat), round(abs(self.freStat - 100), 2)])
 
         ##### INDEX 3 IN DATA: Flesch-Kincaid Grade #####
         # [INDEX 0] Pure score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 18
         self.fkgRaw = textstat.flesch_kincaid_grade(self.text)
         self.fkgStat = self.adjustScore(self.fkgRaw)
-        self.data.append([self.fkgRaw, self.grade(self.fkgStat), self.fkgStat/0.18])
+        self.data.append([round(self.fkgStat, 3), self.grade(self.fkgStat), round(self.fkgStat/0.18, 2)])
 
         ##### INDEX 4 IN DATA: Gunning FOG Index #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 18
         self.fogRaw = textstat.gunning_fog(self.text)
         self.fogStat = self.adjustScore(self.fogRaw)
-        self.data.append([self.fogRaw, self.grade(self.fogStat), self.fogStat/0.18])
+        self.data.append([round(self.fogStat, 3), self.grade(self.fogStat), round(self.fogStat/0.18, 2)])
 
         ##### INDEX 5 IN DATA: SMOG Index #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 18
         self.smogRaw = textstat.smog_index(self.text)
         self.smogStat = self.adjustScore(self.smogRaw)
-        self.data.append([self.smogRaw, self.grade(self.smogStat), self.smogStat/0.18])
+        self.data.append([round(self.smogStat, 3), self.grade(self.smogStat), round(self.smogStat/0.18, 2)])
 
         ##### INDEX 6 IN DATA: Automated Readability Index #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 14
         self.ariRaw = textstat.automated_readability_index(self.text)
         self.ariStat = min(max(self.ariRaw, 0), 14)
-        self.data.append([self.ariRaw, self.ariGrade(ceil(self.ariStat)), self.ariStat/0.14]) #13
+        self.data.append([round(self.ariStat, 3), self.ariGrade(ceil(self.ariStat)), round(self.ariStat/0.14, 2)]) #13
 
         ##### INDEX 7 IN DATA: Coleman-Liau Index #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 18
         self.cliRaw = textstat.coleman_liau_index(self.text)
         self.cliStat = self.adjustScore(self.cliRaw)
-        self.data.append([self.cliRaw, self.grade(self.cliStat), self.cliStat/0.18])
+        self.data.append([round(self.cliStat, 3), self.grade(self.cliStat), round(self.cliStat/0.18, 2)])
 
         ##### INDEX 8 IN DATA: Linsear Write Index #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 18
         self.lwiRaw = textstat.linsear_write_formula(self.text)
         self.lwiStat = self.adjustScore(self.lwiRaw)
-        self.data.append([self.lwiRaw, self.grade(self.lwiStat), self.lwiStat/0.18])
+        self.data.append([round(self.lwiStat, 3), self.grade(self.lwiStat), round(self.lwiStat/0.18, 2)])
 
         ##### INDEX 9 IN DATA: Dale-Chall Readability Score #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
         # SCORE SCALE: 0 - 10
         self.dcrRaw = textstat.dale_chall_readability_score(self.text)
         self.dcrStat = min(max(self.dcrRaw, 0), 10)
-        self.data.append([self.dcrRaw, self.grade(self.dcrStat), self.dcrStat/0.1])
+        self.data.append([round(self.dcrStat, 3), self.grade(self.dcrStat), round(self.dcrStat/0.1, 2)])
 
         ##### INDEX 10 IN DATA: Overall Score #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score
@@ -152,7 +152,7 @@ class TextAnalysis:
         self.txtRaw = textstat.text_standard(self.text, True)
         self.txtStd = min(max(self.txtRaw, 0), 20)
         self.txtInfo = textstat.text_standard(self.text)
-        self.data.append([self.txtRaw, self.txtGrade(self.txtStd, self.txtInfo), self.txtStd/0.2])
+        self.data.append([round(self.txtStd, 3), self.txtGrade(self.txtStd, self.txtInfo), round(self.txtStd/0.2, 2)])
 
         return self.data
 
