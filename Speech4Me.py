@@ -163,10 +163,8 @@ def review():
         string_start += "</p>"
         print(string_start)
 
-    Html_file = open(join(dirname(abspath(__file__)), "templates/generated_paragraph.html"), "w")
-    Html_file.write(string_start)
-    Html_file.close()
-    return render_template('review.html', type_a = type_e)
+
+    return render_template('review.html', type_a = type_e, all_dat=string_start)
 
 
 @app.route('/finish', methods=['GET', 'POST'])

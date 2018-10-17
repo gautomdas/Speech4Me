@@ -188,7 +188,7 @@
 </div>
 <form action="{{ url_for('finish') }}" method="post">
     <div id="edit_text" style="text-align:left;">
-    {% include 'generated_paragraph.html' %}
+    {{ all_dat|safe }}
     </div>
     <div style="text-align: center">
     <input id="button" type="submit">
