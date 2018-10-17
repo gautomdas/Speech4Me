@@ -184,11 +184,11 @@
 </style>
 <br/>
 <div style="width: 80%; text-align: center; margin: auto;">
-  <h2>You wanted a {{ type_a }} text. These are words we considered to be {{ type_a }}. Click the grey boxes to start making changes: </h2>
+  <h2>{{ type_a }}</h2>
 </div>
 <form action="{{ url_for('finish') }}" method="post">
     <div id="edit_text" style="text-align:left;">
-    {% include 'generated_paragraph.html' %}
+    {{ all_dat|safe }}
     </div>
     <div style="text-align: center">
     <input id="button" type="submit">

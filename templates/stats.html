@@ -521,10 +521,12 @@ new Chart(document.getElementById("myChartC"), {
 
 <h2 align="center">Overall Grade</h2>
   <h3 align="center">Your overall grade was: {{ over }}</h3>
-  <h3 align="center"><i>You can now enter in the grade level you prefer. Please numbers only ('10', '5'):</i></h3>
+  <h3 align="center"><i>Please now choose if you want us to find harder synonyms, easier synonyms, or both:</i></h3>
   <div style="text-align:center;">
     <form action="{{ url_for('review') }}" method="post">
-        <input type="number" name="someid" id="someid"/>
+        <input type="radio" name="options" id="harder" value="harder" checked><label style="font-size: 30px"> I want to make my speech more complex (harder).</label></input><br>
+        <input type="radio" name="options" id="easier" value="easier"><label style="font-size: 30px"> I want to make my speech more simple (easier).</label></input><br>
+        <input type="radio" name="options" id="both" value="both"><label style="font-size: 30px"> I want to see both synonym options (both).</label></input><br>
         <br/>
         <input id="button" type="submit">
     </form>
