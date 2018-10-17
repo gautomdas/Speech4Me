@@ -59,6 +59,7 @@ def stats():
 def review():
     tot = []
     session["words_all"] = []
+    session["string_start"] = "<p>"
     grade = request.form['someid']
     if not(grade.isdigit()):
          return ('', 204)
@@ -67,7 +68,6 @@ def review():
     final = []
     if(int(grade)>original_grad):
         type_e = "harder"
-        string_start = "<p>"
 
         for line in all_lines:
             print("FLAG")
@@ -88,34 +88,34 @@ def review():
                     print("HERE")
                     if(len(choices)==0):
                         if per_flag:
-                            string_start+= word+". "
+                            session["string_start"]+= word+". "
                             sec_flag = True
                         else:
-                            string_start+= word+" "
+                            session["string_start"]+= word+" "
                     if(len(choices)>0):
-                        string_start+=" <select class=\"someSel\" name=\""+word+"\">"
-                        string_start+= "<option class=\"others\" value=\""+word+"\">"+word+"</option>"
+                        session["string_start"]+=" <select class=\"someSel\" name=\""+word+"\">"
+                        session["string_start"]+= "<option class=\"others\" value=\""+word+"\">"+word+"</option>"
                         for choice in choices:
-                            string_start+= "<option class=\"others\" value=\""+choice[0]+"\">"+choice[0]+"</option>"
-                        string_start+= "</select></span> "
+                            session["string_start"]+= "<option class=\"others\" value=\""+choice[0]+"\">"+choice[0]+"</option>"
+                        session["string_start"]+= "</select></span> "
                 else:
                     if per_flag:
-                        string_start += word + ". "
+                        session["string_start"] += word + ". "
                         sec_flag = True
                     else:
-                        string_start += word + " "
+                        session["string_start"] += word + " "
                 if per_flag and not sec_flag:
-                    string_start+=". "
+                    session["string_start"]+=". "
                 tot.append(word)
                 session["words_all"].append(tot)
 
-            string_start+="<br>"
+            session["string_start"]+="<br>"
             session["words_all"]+=["!BREAK!"]
-        string_start += "</p>"
-        print(string_start)
+        session["string_start"] += "</p>"
+        print(session["string_start"])
     else:
         type_e = "easier"
-        string_start = "<p>"
+        session["string_start"] = "<p>"
 
         for line in all_lines:
             print("FLAG")
@@ -136,35 +136,35 @@ def review():
                     print("HERE")
                     if (len(choices) == 0):
                         if per_flag:
-                            string_start += word + ". "
+                            session["string_start"] += word + ". "
                             sec_flag = True
                         else:
-                            string_start += word + " "
+                            session["string_start"] += word + " "
                     if (len(choices) > 0):
-                        string_start += " <select class=\"someSel\" name=\"" + word + "\">"
-                        string_start += "<option class=\"others\" value=\"" + word + "\">" + word + "</option>"
+                        session["string_start"] += " <select class=\"someSel\" name=\"" + word + "\">"
+                        session["string_start"] += "<option class=\"others\" value=\"" + word + "\">" + word + "</option>"
                         for choice in choices:
-                            string_start += "<option class=\"others\" value=\"" + choice[0] + "\">" + choice[
+                            session["string_start"] += "<option class=\"others\" value=\"" + choice[0] + "\">" + choice[
                                 0] + "</option>"
-                        string_start += "</select></span> "
+                        session["string_start"] += "</select></span> "
                 else:
                     if per_flag:
-                        string_start += word + ". "
+                        session["string_start"] += word + ". "
                         sec_flag = True
                     else:
-                        string_start += word + " "
+                        session["string_start"] += word + " "
                 if per_flag and not sec_flag:
-                    string_start += ". "
+                    session["string_start"] += ". "
                 tot.append(word)
                 session["words_all"].append(tot)
 
-            string_start += "<br>"
+            session["string_start"] += "<br>"
             session["words_all"] += ["!BREAK!"]
-        string_start += "</p>"
-        print(string_start)
+        session["string_start"] += "</p>"
+        print(session["string_start"])
 
 
-    return render_template('review.html', type_a = type_e, all_dat=string_start)
+    return render_template('review.html', type_a = type_e, all_dat=session["string_start"])
 
 
 @app.route('/finish', methods=['GET', 'POST'])
@@ -200,4 +200,4 @@ def finish():
 
 if __name__ == '__main__':
     context = ('fullchain.pem', 'privkey.pem')
-    app.run(host='0.0.0.0', port = 443, ssl_context=context)
+    app.run(host='0.0.0.0', port = 443, ssl_context=context, threaded=True)
