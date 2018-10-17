@@ -60,14 +60,14 @@ def review():
     tot = []
     session["words_all"] = []
     session["string_start"] = "<p>"
-    grade = request.form['someid']
-    if not(grade.isdigit()):
-         return ('', 204)
+    print("****HERE******")
+    grade = request.form['options']
+    print("This is the grade: \""+grade+"\"")
     print("id: "+grade)
     all_lines = session["all_text"].splitlines()
     final = []
-    if(int(grade)>original_grad):
-        type_e = "harder"
+    if(grade=="harder"):
+        type_e = "You wanted a harder text. These are words we considered to be harder. Click the grey boxes to start making changes:"
 
         for line in all_lines:
             print("FLAG")
@@ -113,8 +113,8 @@ def review():
             session["words_all"]+=["!BREAK!"]
         session["string_start"] += "</p>"
         print(session["string_start"])
-    else:
-        type_e = "easier"
+    elif(grade=="easier"):
+        type_e = "You wanted a easier text. These are words we considered to be easier. Click the grey boxes to start making changes:"
         session["string_start"] = "<p>"
 
         for line in all_lines:
@@ -143,6 +143,57 @@ def review():
                     if (len(choices) > 0):
                         session["string_start"] += " <select class=\"someSel\" name=\"" + word + "\">"
                         session["string_start"] += "<option class=\"others\" value=\"" + word + "\">" + word + "</option>"
+                        for choice in choices:
+                            session["string_start"] += "<option class=\"others\" value=\"" + choice[0] + "\">" + choice[
+                                0] + "</option>"
+                        session["string_start"] += "</select></span> "
+                else:
+                    if per_flag:
+                        session["string_start"] += word + ". "
+                        sec_flag = True
+                    else:
+                        session["string_start"] += word + " "
+                if per_flag and not sec_flag:
+                    session["string_start"] += ". "
+                tot.append(word)
+                session["words_all"].append(tot)
+
+            session["string_start"] += "<br>"
+            session["words_all"] += ["!BREAK!"]
+        session["string_start"] += "</p>"
+        print(session["string_start"])
+
+    else:
+        type_e = "You wanted both kinds of synonyms. Click the grey boxes to start making changes:"
+        session["string_start"] = "<p>"
+
+        for line in all_lines:
+            print("FLAG")
+            words = line.split(" ")
+            print(words)
+            for word in words:
+                tot = []
+                tot.append(word)
+                print("_" * 20)
+                print(word)
+                per_flag = False
+                sec_flag = False
+                if "." in word:
+                    per_flag = True
+                    word = word.split(".")[0]
+                choices = textSyn.getChange(word)
+                if (len(word) > 3):
+                    print("HERE")
+                    if (len(choices) == 0):
+                        if per_flag:
+                            session["string_start"] += word + ". "
+                            sec_flag = True
+                        else:
+                            session["string_start"] += word + " "
+                    if (len(choices) > 0):
+                        session["string_start"] += " <select class=\"someSel\" name=\"" + word + "\">"
+                        session[
+                            "string_start"] += "<option class=\"others\" value=\"" + word + "\">" + word + "</option>"
                         for choice in choices:
                             session["string_start"] += "<option class=\"others\" value=\"" + choice[0] + "\">" + choice[
                                 0] + "</option>"
