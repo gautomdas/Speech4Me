@@ -144,7 +144,7 @@ class TextAnalysis:
         # SCORE SCALE: 0 - 10
         self.dcrRaw = textstat.dale_chall_readability_score(self.text)
         self.dcrStat = min(max(self.dcrRaw, 0), 10)
-        self.data.append([round(self.dcrStat, 3), self.grade(self.dcrStat), round(self.dcrStat/0.1, 2)])
+        self.data.append([round(self.dcrStat, 3), self.daleChallGrade(self.dcrStat), round(self.dcrStat/0.1, 2)])
 
         ##### INDEX 10 IN DATA: Overall Score #####
         # [INDEX 0] Pure Score              [INDEX 1] Approximate grade     [INDEX 2] Normalized (ratio) score

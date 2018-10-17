@@ -428,8 +428,9 @@ new Chart(document.getElementById("myChart"), {
       </tr>
 
     </table>
-    <p style="font-size:14px;"><b>NOTE:</b>The grading scale for each system can vary. Additionally, always remember these scores and indices (indexes) are general guidelines. Many of these tests are very similar, and may also be inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).</p>
-            <p style="font-size:14px;">The programming used to calculate the scores is also not fully accurate within what the readability formulas should be calculated as due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
+    <p style="font-size:20px;"><b>NOTE:</b>The grading scale for each system can vary. Additionally, always remember these scores and indices (indexes) are general guidelines. Many of these tests are very similar, and may also be inaccurate. For example, a significant part of the tests factors in syllable count for word difficulty, which is not always true. (e.g., "interesting", which has 4 syllables but is easy).</p>
+    <p style="font-size:20px;">The programming used to calculate the scores is also not fully accurate within what the readability formulas should be calculated as due to not always counting syllables correctly. Please remember to take everything with a grain of salt.</p>
+    <p style="font-size:20px;"><b>The SMOG index will equal 0 for input of 3 sentences or less</b>, as it is meant for 30-sentence (and higher) samples.</p>
     <br/>
     <br/>
   <h2 align="center">Grade Graph</h2>
@@ -506,7 +507,7 @@ new Chart(document.getElementById("myChartC"), {
             <p><b>FRE</b>: This refers to the Flesch Reading ease score. One of the most used readability indexes.</p>
             <p><b>FKG</b>: This refers to the Flesch-Kincaid grade. Based on US grade levels. Alternative to Flesch Reading ease, also widely used. </p>
             <p><b>Fog</b>: This refers to the Gunning fog index. Based on US grade levels.</p>
-            <p><b>SMOG</b>: This refers to the SMOG grade. Based on US grade levels; most used for health messages.</p>
+            <p><b>SMOG</b>: This refers to the SMOG grade. Based on US grade levels; most used for health messages. Sentence count should be <b>above 30.</b></p>
             <p><b>ARI</b>: This refers to the automated readability index (ARI). Based on US grade system. Uses characters per word -- less accurate but faster to calculate.</p>
             <p><b>CLI</b>: This refers to the Coleman-Liau index. Designed to output US grade system. Uses characters per word, not syllables.</p>
             <p><b>LWI</b>: This refers to the Linsear Write index. Designed by the US Air Force for technical manuals. Based on US grade system.</p>
